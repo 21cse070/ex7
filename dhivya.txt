@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <h5>click here to go to servlet<a href="hello">here</a></h5>
+        <form action="http://localhost:8080/WebApplication2/NewServlet1">
+            <p>Enter a sentence and click find to find the LONGEST WORD <P>
+            Enter a sentence:<input type="text" name="t1">
+            <input type="submit" value="Find">
+           
+        </form>
+    </body>
+</html>
+
+
+
+SERVLET:
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author 21cse080
+ */
+public class NewServlet1 extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("</body>");
+            out.println("</html>");
+        String s=request.getParameter("t1");
+            //String s="ab";
+       s += " "; //Add space at end of string
+       String word = "", lWord = "";
+       int len = s.length();
+       
+       for (int i = 0; i < len; i++) {
+           char ch = s.charAt(i);
+           if (ch == ' ') {
+               
+                if (word.length() > lWord.length())
+                    lWord = word;
+                   
+                word = "";
+           }
+           else {
+               word += ch;
+           }
+       }
+       out.println("<h1> The longest word is:</h1>");
+                out.println("<h1> "+lWord+" </h1>");
+
+        }
+        finally{
+            out.println("Executed");
+        }
+    }
+
+
+
+
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+       
+       
+ 
+    <h1>CITIES</h1>
+    <form action="http://localhost:8080/javaser/servletA" method="post">
+        city<input type="text" name="t">
+    Enter city1<input type="text" name="t1">
+  Enter city2<input type="text" name="t2">
+  Enter city3<input type="text" name="t3">
+  Enter city4<input type="text" name="t4">
+  <input type="submit">
+    </form>
+   
+   
+    <!-- onclick event to sort data--> <h5> click here to go <a href="http://localhost:8080/javaser/servletA"> servlet</a> </h5>
+    </body>
+</html>
+        
+
+
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ *
+ * @author 21cse081
+ */
+@WebServlet(urlPatterns = {"/servletA"})
+public class servletA extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP
+     * <code>GET</code> and
+     * <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet servletA</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet servletA at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            String C=request.getParameter("t");
+             out.println("<h1>" + C + "</h1>");
+            String s=request.getParameter("t1");
+             out.println("<h5>" + s + "</h5>");
+             String s1=request.getParameter("t2");
+             out.println("<h5>" + s1 + "</h5>");
+             String s2=request.getParameter("t3");
+             out.println("<h5>" + s2 + "</h5>");
+             String s3=request.getParameter("t4");
+             out.println("<h5>" + s3 + "</h5>");
+   
+    int n = 4;
+              String names[]
+            = { "Tiruvannamalai", "Madurai", "Theni","Trichy" };
+        String temp;
+             for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+               
+                // to compare one string with other strings
+                if (names[i].compareTo(names[j]) > 0) {
+                    // swapping
+                    temp = names[i];
+                    names[i] = names[j];
+                    names[j] = temp;
+                }
+               
+            }
+        }
+             for (int i = 0; i < n; i++)
+             {
+ 
+               out.println("<h1>" + names[i] + "</h1>");  
+             }
+       
+               
+        }
+        finally {            
+            out.close();
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP
+     * <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP
+     * <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+}
+
